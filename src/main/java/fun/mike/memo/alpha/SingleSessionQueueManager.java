@@ -1,4 +1,4 @@
-package fun.mike.memo;
+package fun.mike.memo.alpha;
 
 import java.io.Closeable;
 import java.util.List;
@@ -6,8 +6,8 @@ import javax.jms.Connection;
 import javax.jms.Message;
 import javax.jms.Session;
 
-import fun.mike.memo.impl.JmsMessageParser;
-import fun.mike.memo.impl.JmsMessaging;
+import fun.mike.memo.impl.alpha.JmsMessageParser;
+import fun.mike.memo.impl.alpha.JmsMessaging;
 
 public class SingleSessionQueueManager implements QueueManager, Closeable, AutoCloseable {
     private Session session;

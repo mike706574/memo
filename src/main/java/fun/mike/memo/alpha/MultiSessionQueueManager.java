@@ -1,14 +1,14 @@
-package fun.mike.memo;
+package fun.mike.memo.alpha;
 
 import java.util.List;
 import javax.jms.ConnectionFactory;
 import javax.jms.Message;
 
-import fun.mike.memo.impl.Connector;
-import fun.mike.memo.impl.JmsMessageParser;
-import fun.mike.memo.impl.JmsMessaging;
-import fun.mike.memo.impl.SessionConsumer;
-import fun.mike.memo.impl.SessionFunction;
+import fun.mike.memo.impl.alpha.Connector;
+import fun.mike.memo.impl.alpha.JmsMessageParser;
+import fun.mike.memo.impl.alpha.JmsMessaging;
+import fun.mike.memo.impl.alpha.SessionConsumer;
+import fun.mike.memo.impl.alpha.SessionFunction;
 
 public class MultiSessionQueueManager implements QueueManager {
     private Connector connector;

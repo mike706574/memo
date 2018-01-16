@@ -1,4 +1,4 @@
-package fun.mike.memo.impl;
+package fun.mike.memo.impl.alpha;
 
 import java.util.Enumeration;
 import java.util.LinkedList;
@@ -13,7 +13,7 @@ import javax.jms.QueueBrowser;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
-import fun.mike.memo.QueueManagerException;
+import fun.mike.memo.alpha.QueueManagerException;
 
 public class JmsMessaging {
     public static List<Message> getJmsMessages(Session session, String queueName) {

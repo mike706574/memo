@@ -1,4 +1,4 @@
-package fun.mike.memo.impl;
+package fun.mike.memo.impl.alpha;
 
 import javax.jms.Connection;
 import javax.jms.JMSException;

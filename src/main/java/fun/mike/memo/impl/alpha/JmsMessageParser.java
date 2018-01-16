@@ -1,11 +1,11 @@
-package fun.mike.memo.impl;
+package fun.mike.memo.impl.alpha;
 
 import javax.jms.BytesMessage;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.TextMessage;
 
-import fun.mike.memo.QueueManagerException;
+import fun.mike.memo.alpha.QueueManagerException;
 
 public class JmsMessageParser {
     public static String parseToString(Message message) {

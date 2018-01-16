@@ -1,4 +1,4 @@
-package fun.mike.memo;
+package fun.mike.memo.alpha;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;

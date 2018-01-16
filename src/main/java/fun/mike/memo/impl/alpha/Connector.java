@@ -1,10 +1,10 @@
-package fun.mike.memo.impl;
+package fun.mike.memo.impl.alpha;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
 
-import fun.mike.memo.QueueManagerException;
+import fun.mike.memo.alpha.QueueManagerException;
 
 public class Connector {
     private ConnectionFactory connFactory;

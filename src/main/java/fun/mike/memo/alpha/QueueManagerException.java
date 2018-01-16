@@ -1,4 +1,4 @@
-package fun.mike.memo;
+package fun.mike.memo.alpha;
 
 public class QueueManagerException extends RuntimeException {
     public QueueManagerException(String message) {
