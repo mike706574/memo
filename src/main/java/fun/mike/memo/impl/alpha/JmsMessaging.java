@@ -136,7 +136,7 @@ public class JmsMessaging {
         }
     }
 
-    public static void withConnAndSession(Connector connector,
+    public static void useConnAndSession(Connector connector,
             ConnectionAndSessionConsumer consumer) {
         Connection conn = null;
         Session session = null;
@@ -152,7 +152,7 @@ public class JmsMessaging {
         }
     }
 
-    public static void withSession(Connector connector, SessionConsumer consumer) {
+    public static void useSession(Connector connector, SessionConsumer consumer) {
         Connection conn = null;
         Session session = null;
 
@@ -167,7 +167,7 @@ public class JmsMessaging {
         }
     }
 
-    public static <T> T viaSession(Connector connector,
+    public static <T> T withSession(Connector connector,
             SessionFunction<T> function) {
         Connection conn = null;
         Session session = null;

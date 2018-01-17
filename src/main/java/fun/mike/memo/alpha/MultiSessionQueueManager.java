@@ -18,35 +18,35 @@ public class MultiSessionQueueManager implements QueueManager {
     }
 
     public void sendMessage(String queueName, String message) {
-        withSession(session -> JmsMessaging.sendMessage(session, queueName, message));
+        useSession(session -> JmsMessaging.sendMessage(session, queueName, message));
     }
 
     public void sendMessage(String queueName, String message, String jmsType) {
-        withSession(session -> JmsMessaging.sendMessage(session, queueName, message, jmsType));
+        useSession(session -> JmsMessaging.sendMessage(session, queueName, message, jmsType));
     }
 
     public List<String> getMessages(String queueName) {
-        return viaSession(session -> JmsMessaging.getMessages(session, queueName));
+        return withSession(session -> JmsMessaging.getMessages(session, queueName));
     }
 
     public int countMessages(String queueName) {
-        return viaSession(session -> JmsMessaging.countMessages(session, queueName));
+        return withSession(session -> JmsMessaging.countMessages(session, queueName));
     }
 
     public void consumeMessages(String queueName) {
-        JmsMessaging.withConnAndSession(connector, (conn, session) -> JmsMessaging.consumeMessages(conn, session, queueName));
+        JmsMessaging.useConnAndSession(connector, (conn, session) -> JmsMessaging.consumeMessages(conn, session, queueName));
     }
 
     public String parseMessage(Message message) {
         return JmsMessageParser.parseToString(message);
     }
 
-    private void withSession(SessionConsumer consumer) {
-        JmsMessaging.withSession(connector, consumer);
+    private void useSession(SessionConsumer consumer) {
+        JmsMessaging.useSession(connector, consumer);
     }
 
-    private <T> T viaSession(SessionFunction<T> function) {
-        return JmsMessaging.viaSession(connector, function);
+    private <T> T withSession(SessionFunction<T> function) {
+        return JmsMessaging.withSession(connector, function);
     }
 
 }
