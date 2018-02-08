@@ -53,7 +53,9 @@ public class StaticQueueManager implements QueueManager {
         return getMessages(queueName).size();
     }
 
-    public void consumeMessages(String queueName) {
+    public List<String> consumeMessages(String queueName) {
+        List<String> messages = new LinkedList<>(messagesByQueue.get(queueName));
         messagesByQueue.remove(queueName);
+        return messages;
     }
 }

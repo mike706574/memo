@@ -11,5 +11,5 @@ public interface QueueManager {
 
     int countMessages(String queueName);
 
-    void consumeMessages(String queueName);
+    List<String> consumeMessages(String queueName);
 }

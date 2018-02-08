@@ -34,8 +34,8 @@ public class SingleSessionQueueManager implements QueueManager, Closeable, AutoC
         return JmsMessaging.countMessages(session, queueName);
     }
 
-    public void consumeMessages(String queueName) {
-        JmsMessaging.consumeMessages(connection, session, queueName);
+    public List<String> consumeMessages(String queueName) {
+        return JmsMessaging.consumeMessages(connection, session, queueName);
     }
 
     public String parseMessage(Message message) {

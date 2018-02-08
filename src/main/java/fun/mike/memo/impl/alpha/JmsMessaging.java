@@ -3,6 +3,7 @@ package fun.mike.memo.impl.alpha;
 import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import javax.jms.Connection;
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -90,22 +91,49 @@ public class JmsMessaging {
         }
     }
 
-    public static void consumeMessages(Connection conn, Session session, String queueName) {
+    public static void sendMessage(Session session, String queueName, String message, Map<String, Object> props) {
+        System.out.println("Props: " + props);
         try {
+            Queue queue = session.createQueue(queueName);
+            MessageProducer producer = session.createProducer(queue);
+            TextMessage textMessage = session.createTextMessage(message);
+
+            if (props.containsKey("Type")) {
+                String jmsType = (String) props.get("Type");
+                System.out.println("Setting JMS type to " + jmsType + ".");
+                textMessage.setJMSType(jmsType);
+            }
+
+            for (Map.Entry<String, Object> entry : props.entrySet()) {
+                textMessage.setObjectProperty(entry.getKey(), entry.getValue());
+            }
+
+            producer.send(textMessage);
+        } catch (JMSException ex) {
+            throw new QueueManagerException(ex);
+        }
+    }
+
+    public static List<String> consumeMessages(Connection conn, Session session, String queueName) {
+        try {
+            List<String> messages = new LinkedList<>();
+
             Queue queue = session.createQueue(queueName);
             MessageConsumer consumer = session.createConsumer(queue);
             Message message;
             boolean end = false;
+
             while (!end) {
                 conn.start();
                 message = consumer.receive(1000);
                 if (message == null) {
                     end = true;
                 } else {
-                    String text = JmsMessageParser.parseToString(message);
-                    System.out.println("Consumed message: " + text);
+                    messages.add(JmsMessageParser.parseToString(message));
                 }
             }
+
+            return messages;
         } catch (JMSException ex) {
             throw new QueueManagerException(ex);
         }
@@ -145,6 +173,22 @@ public class JmsMessaging {
             conn = connector.getConnection();
             session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
             consumer.accept(conn, session);
+        } catch (JMSException ex) {
+            throw new QueueManagerException(ex);
+        } finally {
+            JmsMessaging.safelyCloseConnAndSession(conn, session);
+        }
+    }
+
+    public static <T> T withConnAndSession(Connector connector,
+            ConnectionAndSessionFunction<T> consumer) {
+        Connection conn = null;
+        Session session = null;
+
+        try {
+            conn = connector.getConnection();
+            session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            return consumer.apply(conn, session);
         } catch (JMSException ex) {
             throw new QueueManagerException(ex);
         } finally {

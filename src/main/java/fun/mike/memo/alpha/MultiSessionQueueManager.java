@@ -33,8 +33,8 @@ public class MultiSessionQueueManager implements QueueManager {
         return withSession(session -> JmsMessaging.countMessages(session, queueName));
     }
 
-    public void consumeMessages(String queueName) {
-        JmsMessaging.useConnAndSession(connector, (conn, session) -> JmsMessaging.consumeMessages(conn, session, queueName));
+    public List<String> consumeMessages(String queueName) {
+        return JmsMessaging.withConnAndSession(connector, (conn, session) -> JmsMessaging.consumeMessages(conn, session, queueName));
     }
 
     public String parseMessage(Message message) {
