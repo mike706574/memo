@@ -1,19 +1,22 @@
 package fun.mike.memo.alpha;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
-public class StaticQueueManager implements QueueManager {
-    private Map<String, Queue<String>> messagesByQueue;
 
-    public StaticQueueManager() {
-        messagesByQueue = new LinkedHashMap<>();
+public class StaticQueueManager implements QueueManager {
+    private static Map<String, Queue<String>> messagesByQueue =
+        Collections.synchronizedMap(new LinkedHashMap<>());
+
+    public static void clear() {
+        messagesByQueue.clear();
     }
 
-    public Map<String, List<String>> getMessagesByQueue() {
+    public static Map<String, List<String>> getMessagesByQueue() {
         Map<String, List<String>> result = new LinkedHashMap<>();
 
         for (Map.Entry<String, Queue<String>> entry : messagesByQueue.entrySet()) {
