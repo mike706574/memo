@@ -1,6 +1,6 @@
 # memo
 
-[![Maven Central](https://img.shields.io/maven-central/v/fun.mike/memo-alpha.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22fun.mike%22%20AND%20a%3A%22memo-alpha%22)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/fun.mike/memo-alpha/badge.svg)](https://maven-badges.herokuapp.com/maven-central/fun.mike/memo-alpha)
 
 A little wrapper around some parts of JMS.
 
