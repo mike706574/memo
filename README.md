@@ -5,10 +5,6 @@
 
 A little wrapper around some parts of JMS.
 
-## Build
-
-[![CircleCI](https://circleci.com/gh/mike706574/memo.svg?style=svg)](https://circleci.com/gh/mike706574/memo)
-
 ## Copyright and License
 
 The use and distribution terms for this software are covered by the
